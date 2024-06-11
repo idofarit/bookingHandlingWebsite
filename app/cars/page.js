@@ -6,6 +6,8 @@ export const metadata = {
   title: "Cars",
 };
 
+export const revalidate = 3600;
+
 export default async function Page() {
   // CHANGE
 
@@ -15,14 +17,10 @@ export default async function Page() {
         Our Camper Cars
       </h1>
       <p className="text-primary-200 text-lg mb-10">
-        Our Peugeot Camper vans comes in larger, measuring 5.41 metres in
-        length, designed for adventure enthusiasts seeking both comfort and
-        mobility. This versatile camper boasts a thoughtfully crafted interior
-        with a host of amenities including a comfortable sleeping area with
-        additional sleeping in the pop-top, along with a compact kitchenette
-        equipped with modern appliances. The ingenious use of space ensures a
-        comfortable travel experience without compromising on functionality,
-        making every trip memorable.
+        Camper vans can be ideal for adventurous road trips, whether you're
+        navigating mountain roads or cruising along the coast. They can also
+        provide ample storage space for equipment and gear, such as food,
+        clothes, and recreational items.
       </p>
       <Suspense fallback={<Spinner />}>
         <CarList />

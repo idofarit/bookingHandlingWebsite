@@ -1,16 +1,21 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getCars } from "../_lib/data-service";
+
+export const revalidate = 86400;
 
 export const metadata = {
   title: "about",
 };
 
-export default function Page() {
+export default async function Page() {
+  const cars = await getCars();
+
   return (
     <div className="grid grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
       <div className="col-span-3">
         <h1 className="text-4xl mb-10 text-accent-400 font-medium">
-          Welcome to The Wild Oasis
+          Welcome to The Car-Stop
         </h1>
 
         <div className="space-y-8">
@@ -22,10 +27,10 @@ export default function Page() {
             simple pleasures with family.
           </p>
           <p>
-            Our 8 luxury cabins provide a cozy base, but the real freedom and
-            peace you'll find in the surrounding mountains. Wander through lush
-            forests, breathe in the fresh air, and watch the stars twinkle above
-            from the warmth of a campfire or your hot tub.
+            Our {cars.length} luxury camper vans provide a cozy base, but the
+            real freedom and peace you'll find in the surrounding mountains.
+            Wander through lush forests, breathe in the fresh air, and watch the
+            stars twinkle above from the warmth of a campfire or your hot tub.
           </p>
           <p>
             This is where memorable moments are made, surrounded by nature's

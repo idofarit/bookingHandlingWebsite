@@ -51,7 +51,7 @@ export const getCars = async function () {
   return data;
 };
 
-// Guests are uniquely identified by their email address
+// customers are uniquely identified by their email address
 export async function getCustomer(email) {
   const { data, error } = await supabase
     .from("customers")
@@ -137,17 +137,17 @@ export async function getSettings() {
   return data;
 }
 
-export async function getCountries() {
-  try {
-    const res = await fetch(
-      "https://restcountries.com/v2/all?fields=name,flag"
-    );
-    const countries = await res.json();
-    return countries;
-  } catch {
-    throw new Error("Could not fetch countries");
-  }
-}
+// export async function getCountries() {
+//   try {
+//     const res = await fetch(
+//       "https://restcountries.com/v2/all?fields=name,flag"
+//     );
+//     const countries = await res.json();
+//     return countries;
+//   } catch {
+//     throw new Error("Could not fetch countries");
+//   }
+// }
 
 /////////////
 // CREATE

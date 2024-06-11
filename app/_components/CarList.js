@@ -1,8 +1,11 @@
 import React from "react";
 import CarCard from "../_components/CarCard";
 import { getCars } from "../_lib/data-service";
+import { unstable_noStore as noStore } from "next/cache";
 
 async function CarList() {
+  noStore();
+
   const cars = await getCars();
 
   if (!cars.length) return null;
