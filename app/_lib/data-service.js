@@ -96,7 +96,7 @@ export async function getBookings(customerId) {
   return data;
 }
 
-export async function getBookedDatesByCabinId(carId) {
+export async function getBookedDatesByCarId(carId) {
   let today = new Date();
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString();
