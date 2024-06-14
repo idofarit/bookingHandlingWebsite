@@ -1,13 +1,14 @@
 import UpdateProfileForm from "@/app/_components/UpdateProfileForm";
+import { auth } from "@/app/_lib/auth";
+import { getCustomer } from "@/app/_lib/data-service";
 
 export const metadata = {
   title: "Update Profile",
 };
 
-export default function Page() {
-  // CHANGE
-  const countryFlag = "pt.jpg";
-  const nationality = "portugal";
+export default async function Page() {
+  const session = await auth();
+  const customer = await getCustomer(session.user.email);
 
   return (
     <div>
@@ -20,7 +21,7 @@ export default function Page() {
         faster and smoother. See you soon!
       </p>
 
-      <UpdateProfileForm />
+      <UpdateProfileForm customer={customer} />
     </div>
   );
 }
