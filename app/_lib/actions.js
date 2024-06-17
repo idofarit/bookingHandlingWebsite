@@ -30,7 +30,30 @@ export async function updateProfile(formData) {
   revalidatePath("/account/profile");
 }
 
-export async function deleteReservation(bookingId) {
+export async function createBooking(bookingData, formData) {
+  console.log(formData);
+
+  const session = await auth();
+
+  if (!session) throw new Error("Please log In");
+
+  const newBooking = {
+    ...bookingData,
+    customerId: session.user.customerId,
+    numberCustomers: Number(formData.get("numberCustomers")),
+    observations: formData.get("observations").slice(0, 1000),
+    extraPrice: 0,
+    totalPrice: bookingData.carPrice,
+    isPaid: false,
+    hasInsurance: false,
+    status: "unconfirmed",
+  };
+  const { error } = await supabase.from("bookings").insert([newBooking]);
+
+  if (error) throw new Error("Booking could not be created");
+}
+
+export async function deleteBooking(bookingId) {
   const session = await auth();
 
   if (!session) throw new Error("Please log In");
