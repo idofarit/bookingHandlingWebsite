@@ -1,6 +1,11 @@
 "use client";
 
-import { isWithinInterval } from "date-fns";
+import {
+  differenceInDays,
+  isPast,
+  isSameDay,
+  isWithinInterval,
+} from "date-fns";
 
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
@@ -19,20 +24,21 @@ function isAlreadyBooked(range, datesArr) {
 function DateSelector({ settings, car, bookedDates }) {
   const { range, setRange, resetRange } = useReservation();
 
-  // CHANGE
-  const regularPrice = 23;
-  const discount = 23;
-  const numNights = 23;
-  const cabinPrice = 23;
+  const displayRange = isAlreadyBooked(range, bookedDates) ? {} : range;
 
-  // SETTINGS
+  const { regularPrice, discount } = car;
+
   const { minOperationLength, maxOperatingLength } = settings;
+
+  const numberDays = differenceInDays(range.to, range.from);
+
+  const carPrice = numberDays * (regularPrice - discount);
 
   return (
     <div className="flex flex-col justify-between">
       <DayPicker
         onSelect={setRange}
-        selected={range}
+        selected={displayRange}
         className="pt-12 place-self-center"
         mode="range"
         min={minOperationLength + 1}
@@ -42,6 +48,10 @@ function DateSelector({ settings, car, bookedDates }) {
         toYear={new Date().getFullYear() + 5}
         captionLayout="dropdown"
         numberOfMonths={2}
+        disabled={(currentDate) =>
+          isPast(currentDate) ||
+          bookedDates.some((date) => isSameDay(date, currentDate))
+        }
       />
 
       <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800 h-[72px]">
@@ -59,14 +69,14 @@ function DateSelector({ settings, car, bookedDates }) {
             )}
             <span className="">/night</span>
           </p>
-          {numNights ? (
+          {numberDays ? (
             <>
               <p className="bg-accent-600 px-3 py-2 text-2xl">
-                <span>&times;</span> <span>{numNights}</span>
+                <span>&times;</span> <span>{numberDays}</span>
               </p>
               <p>
                 <span className="text-lg font-bold uppercase">Total</span>{" "}
-                <span className="text-2xl font-semibold">${cabinPrice}</span>
+                <span className="text-2xl font-semibold">${carPrice}</span>
               </p>
             </>
           ) : null}
