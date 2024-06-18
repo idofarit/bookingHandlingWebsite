@@ -1,18 +1,30 @@
 "use client";
 
-import { differenceInDays } from "date-fns";
+import { differenceInDays, formatISO, isValid } from "date-fns";
 import { createBooking } from "../_lib/actions";
 import { useReservation } from "./ReservationContext";
+import SubmitButton from "./SubmitButton";
 
 function ReservationForm({ car, user }) {
   const { maxCapacity, regularPrice, discount, id } = car;
 
   const { range, resetRange } = useReservation();
 
-  const startDate = range.from;
-  const endDate = range.to;
+  const isValidStartDate = range?.from && isValid(new Date(range.from));
+  const isValidEndDate = range?.to && isValid(new Date(range.to));
 
-  const numberDays = differenceInDays(endDate, startDate);
+  const startDate = isValidStartDate
+    ? formatISO(new Date(range.from), { representation: "date" })
+    : null;
+  const endDate = isValidEndDate
+    ? formatISO(new Date(range.to), { representation: "date" })
+    : null;
+
+  const numberDays =
+    isValidStartDate && isValidEndDate
+      ? differenceInDays(new Date(endDate), new Date(startDate))
+      : 0;
+
   const carPrice = numberDays * (regularPrice - discount);
 
   const bookingData = { startDate, endDate, numberDays, carPrice, carId: id };
@@ -37,7 +49,10 @@ function ReservationForm({ car, user }) {
       </div>
 
       <form
-        action={createBookingWithData}
+        action={async (formData) => {
+          await createBookingWithData(formData);
+          resetRange();
+        }}
         className="bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col"
       >
         <div className="space-y-2">
@@ -72,11 +87,13 @@ function ReservationForm({ car, user }) {
         </div>
 
         <div className="flex justify-end items-center gap-6">
-          <p className="text-primary-300 text-base">Start by selecting dates</p>
-
-          <button className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
-            Book now
-          </button>
+          {!(startDate && endDate) ? (
+            <p className="text-primary-300 text-base">
+              Start by selecting dates
+            </p>
+          ) : (
+            <SubmitButton pendingText="...booking">Book Now</SubmitButton>
+          )}
         </div>
       </form>
     </div>

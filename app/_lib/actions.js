@@ -18,7 +18,7 @@ export async function updateProfile(formData) {
 
   const updateData = { nationalID };
 
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("customers")
     .update(updateData)
     .eq("id", session.user.customerId);
@@ -48,9 +48,14 @@ export async function createBooking(bookingData, formData) {
     hasInsurance: false,
     status: "unconfirmed",
   };
+
   const { error } = await supabase.from("bookings").insert([newBooking]);
 
   if (error) throw new Error("Booking could not be created");
+
+  revalidatePath(`/cars/${bookingData.carId}`);
+
+  redirect("/cars/thankYou");
 }
 
 export async function deleteBooking(bookingId) {

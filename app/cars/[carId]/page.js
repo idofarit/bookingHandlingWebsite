@@ -15,7 +15,7 @@ export async function generateStaticParams() {
   const cars = await getCars();
 
   const ids = cars.map((car) => ({ carId: String(car.id) }));
-  console.log(ids);
+
   return ids;
 }
 
