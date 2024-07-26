@@ -12,9 +12,6 @@ export async function getCar(id) {
     .eq("id", id)
     .single();
 
-  // For testing
-  // await new Promise((res) => setTimeout(res, 1000));
-
   if (error) {
     console.error(error);
     notFound();
@@ -59,7 +56,6 @@ export async function getCustomer(email) {
     .eq("email", email)
     .single();
 
-  // No error here! We handle the possibility of no guest in the sign in callback
   return data;
 }
 
@@ -81,7 +77,6 @@ export async function getBooking(id) {
 export async function getBookings(customerId) {
   const { data, error, count } = await supabase
     .from("bookings")
-    // We actually also need data on the cabins as well. But let's ONLY take the data that we actually need, in order to reduce downloaded data.
     .select(
       "id, created_at, startDate, endDate, numberDays, numberCustomers, totalPrice, customerId, carId, cars(name, image)"
     )
@@ -153,65 +148,13 @@ export async function createCustomer(newCustomer) {
   return data;
 }
 
-// export async function createBooking(newBooking) {
-//   const { data, error } = await supabase
-//     .from("bookings")
-//     .insert([newBooking])
-//     // So that the newly created object gets returned!
-//     .select()
-//     .single();
-
-//   if (error) {
-//     console.error(error);
-//     throw new Error("Booking could not be created");
-//   }
-
-//   return data;
-// }
-
-/////////////
-// UPDATE
-
-// The updatedFields is an object which should ONLY contain the updated data
-// export async function updateCustomer(id, updatedFields) {
-//   const { data, error } = await supabase
-//     .from("customers")
-//     .update(updatedFields)
-//     .eq("id", id)
-//     .select()
-//     .single();
-
-//   if (error) {
-//     console.error(error);
-//     throw new Error("Customer could not be updated");
-//   }
-//   return data;
-// }
-
-// export async function updateBooking(id, updatedFields) {
-//   const { data, error } = await supabase
-//     .from("bookings")
-//     .update(updatedFields)
-//     .eq("id", id)
-//     .select()
-//     .single();
-
-//   if (error) {
-//     console.error(error);
-//     throw new Error("Booking could not be updated");
-//   }
-//   return data;
-// }
-
-// /////////////
-// // DELETE
-
-// export async function deleteBooking(id) {
-//   const { data, error } = await supabase.from("bookings").delete().eq("id", id);
-
-//   if (error) {
-//     console.error(error);
-//     throw new Error("Booking could not be deleted");
-//   }
-//   return data;
-// }
+export async function getAllImages() {
+  const { data, error } = await supabase.storage
+    .from("car-images")
+    .list("folder", {
+      limit: 100,
+      offset: 0,
+      sortBy: { column: "name", order: "asc" },
+    });
+  return data;
+}

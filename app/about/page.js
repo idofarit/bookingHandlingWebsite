@@ -1,6 +1,5 @@
-import Link from "next/link";
 import Image from "next/image";
-import { getCars } from "../_lib/data-service";
+import Link from "next/link";
 
 export const revalidate = 86400;
 
@@ -9,84 +8,87 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const cars = await getCars();
-
   return (
-    <div className="grid grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
-      <div className="col-span-3">
-        <h1 className="text-4xl mb-10 text-accent-400 font-medium">
-          Welcome to The Car-Stop
-        </h1>
-
-        <div className="space-y-8">
-          <p>
-            Where nature's beauty and comfortable living blend seamlessly.
-            Hidden away in the heart of the Italian Dolomites, this is your
-            paradise away from home. But it's not just about the luxury cabins.
-            It's about the experience of reconnecting with nature and enjoying
-            simple pleasures with family.
+    <div className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+      <div className="rounded-xl relative overflow-hidden xs:flex xs:flex-col mx-auto lg:grid grid-cols-2 p-14">
+        <div className="relative lg:h-[25rem] xs:h-[18rem] w-auto shadow-[-48px_54px_20px_-26px_rgba(0,0,0,0.9)] bg-[#ffffff]">
+          <Image
+            className="object-cover"
+            fill
+            src="/abt1.jpg"
+            alt="Sunset in the mountains"
+          />
+        </div>
+        <div className="relative lg:-mt-0 xs:-mt-16 px-10 xs:pt-5 pb-16 bg-white xs:m-10 lg:m-0">
+          <p className="font-semibold text-xl inline-block hover:text-indigo-600 transition duration-500 ease-in-out mb-2">
+            The OG Van's are in Town!
           </p>
-          <p>
-            Our {cars.length} luxury camper vans provide a cozy base, but the
-            real freedom and peace you'll find in the surrounding mountains.
-            Wander through lush forests, breathe in the fresh air, and watch the
-            stars twinkle above from the warmth of a campfire or your hot tub.
+          <p className="text-gray-500 text-lg">
+            CarStop is your One Stop destination where you could have your own
+            Camper, suv or sedan for your next ride. We get your covered from
+            all aspects. Hastle free booking and paperworks.
           </p>
-          <p>
-            This is where memorable moments are made, surrounded by nature's
-            splendor. It's a place to slow down, relax, and feel the joy of
-            being together in a beautiful setting.
+          <p className="mt-5 text-gray-600 text-xs">
+            By &nbsp;
+            <span className="text-xs text-indigo-600 transition duration-500 ease-in-out">
+              John Adams
+            </span>{" "}
+            | &nbsp;
+            <span className="text-xs text-indigo-600 transition duration-500 ease-in-out">
+              Managing Director
+            </span>
+            ,{" "}
+            <span className="text-xs text-indigo-600 transition duration-500 ease-in-out">
+              CarStop
+            </span>
           </p>
         </div>
       </div>
 
-      <div className="col-span-2 aspect-square relative">
-        <Image
-          src="/abt1.jpg"
-          fill
-          className="object-cover"
-          alt="Family sitting around a fire pit in front of cabin"
-        />
+      <div className="text-center lg:m-32 xs:m-8 ">
+        <Link
+          href="/cars"
+          className="inline-block mt-4 rounded-xl bg-slate-400 px-8 py-4 text-white text-lg font-semibold hover:bg-gray-50 transition-all shadow-[rgba(0,0,15,0.5)_10px_5px_4px_0px]"
+        >
+          Pick your ride now
+        </Link>
       </div>
 
-      <div className="col-span-2 relative aspect-square">
-        <Image
-          src="/abt3.jpg"
-          fill
-          className="object-cover"
-          alt="Family that manages The Wild Oasis"
-        />
-      </div>
-
-      <div className="col-span-3">
-        <h1 className="text-4xl mb-10 text-accent-400 font-medium">
-          Managed by our family since 1962
-        </h1>
-
-        <div className="space-y-8">
-          <p>
-            Since 1962, The Wild Oasis has been a cherished family-run retreat.
-            Started by our grandparents, this haven has been nurtured with love
-            and care, passing down through our family as a testament to our
-            dedication to creating a warm, welcoming environment.
+      <div className="rounded-xl overflow-hidden xs:flex xs:flex-col mx-auto lg:grid grid-cols-2 mt-40 p-14 ">
+        <div className="z-[999] relative lg:-mt-0 xs:-mt-16 px-10 lg:translate-y-0 xs:translate-y-[5rem] xs:pt-5 pb-16 bg-white xs:m-10 lg:m-0">
+          <p className="font-semibold text-xl inline-block hover:text-indigo-600 transition duration-500 ease-in-out mb-2">
+            The Best in town and latest models of touring vehicle you could ask
+            for!
           </p>
-          <p>
-            Over the years, we've maintained the essence of The Wild Oasis,
-            blending the timeless beauty of the mountains with the personal
-            touch only a family business can offer. Here, you're not just a
-            guest; you're part of our extended family. So join us at The Wild
-            Oasis soon, where tradition meets tranquility, and every visit is
-            like coming home.
+          <p className="text-gray-500 text-lg">
+            We are the only solution of your suddent trip, 24/7 booking service
+            available. In our world, customer satisfaction is the utmost
+            priority. As we speak , we tend to get in touch with our onboard
+            customers during their ride. Personal assist, guide and offline map
+            is also provided.
           </p>
-
-          <div>
-            <Link
-              href="/cars"
-              className="inline-block mt-4 bg-accent-500 px-8 py-5 text-primary-800 text-lg font-semibold hover:bg-accent-600 transition-all"
-            >
-              Pick your ride now
-            </Link>
-          </div>
+          <p className="mt-5 text-gray-600 text-xs">
+            By &nbsp;
+            <span className="text-xs text-indigo-600 transition duration-500 ease-in-out">
+              Andrew Phill
+            </span>{" "}
+            | &nbsp;
+            <span className="text-xs text-indigo-600 transition duration-500 ease-in-out">
+              Senior Executive
+            </span>
+            , &nbsp;
+            <span className="text-xs text-indigo-600 transition duration-500 ease-in-out">
+              CarStop
+            </span>
+          </p>
+        </div>
+        <div className="relative lg:h-[25rem] xs:h-[18rem] w-auto shadow-[48px_54px_20px_-26px_rgba(0,0,0,0.9)] bg-[#ffffff]">
+          <Image
+            className="object-cover"
+            fill
+            src="/abt2.jpeg"
+            alt="Sunset in the mountains"
+          />
         </div>
       </div>
     </div>

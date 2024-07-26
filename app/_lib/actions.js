@@ -31,8 +31,6 @@ export async function updateProfile(formData) {
 }
 
 export async function createBooking(bookingData, formData) {
-  console.log(formData);
-
   const session = await auth();
 
   if (!session) throw new Error("Please log In");

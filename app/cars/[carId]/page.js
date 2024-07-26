@@ -23,10 +23,10 @@ export default async function Page({ params }) {
   const car = await getCar(params.carId);
 
   return (
-    <div className="max-w-6xl mx-auto mt-8">
+    <div className="max-w-6xl mx-auto md:mt-8 p-[0.75rem]">
       <Car car={car} />
       <div>
-        <h2 className="text-5xl font-semibold text-center mb-10 text-accent-400">
+        <h2 className="text-2xl md:text-5xl font-semibold text-center mb-10 text-gray-600">
           Reserve {car.name} now. Pay on arrival.
         </h2>
 

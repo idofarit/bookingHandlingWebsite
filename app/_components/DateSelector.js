@@ -39,7 +39,7 @@ function DateSelector({ settings, car, bookedDates }) {
       <DayPicker
         onSelect={setRange}
         selected={displayRange}
-        className="pt-12 place-self-center"
+        className="py-12 place-self-center"
         mode="range"
         min={minOperationLength + 1}
         max={maxOperatingLength}
@@ -54,7 +54,7 @@ function DateSelector({ settings, car, bookedDates }) {
         }
       />
 
-      <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800 h-[72px]">
+      <div className="flex items-center justify-between px-8 bg-gray-200 text-primary-800 h-[72px]">
         <div className="flex items-baseline gap-6">
           <p className="flex gap-2 items-baseline">
             {discount > 0 ? (
@@ -71,7 +71,7 @@ function DateSelector({ settings, car, bookedDates }) {
           </p>
           {numberDays ? (
             <>
-              <p className="bg-accent-600 px-3 py-2 text-2xl">
+              <p className="bg-gray-200 px-3 py-2 text-2xl">
                 <span>&times;</span> <span>{numberDays}</span>
               </p>
               <p>

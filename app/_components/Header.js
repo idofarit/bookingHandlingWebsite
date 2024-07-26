@@ -1,9 +1,9 @@
-import Navigation from "@/app/_components/Navigation";
 import Logo from "@/app/_components/Logo";
+import Navigation from "./Navigation";
 
 function Header({ className }) {
   return (
-    <header className={`${className} border-b border-primary-900 px-8 py-5`}>
+    <header className={`${className} border-b px-8 py-1 bg-transparent`}>
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         <Logo />
         <Navigation />

@@ -13,7 +13,7 @@ async function Reservation({ car }) {
   const session = await auth();
 
   return (
-    <div className="grid grid-cols-2 border border-primary-800 min-h-[400px]">
+    <div className="grid lg:grid-cols-2 xs:grid-cols-1 gap-y-4 border min-h-[400px]">
       <DateSelector settings={settings} bookedDates={bookedDates} car={car} />
       {session?.user ? (
         <ReservationForm car={car} user={session.user} />

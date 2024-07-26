@@ -1,11 +1,7 @@
-import React from "react";
-import CarCard from "../_components/CarCard";
 import { getCars } from "../_lib/data-service";
-import { unstable_noStore as noStore } from "next/cache";
+import CarCard from "./CarCard";
 
 async function CarList({ filter }) {
-  // noStore();
-
   const cars = await getCars();
 
   if (!cars.length) return null;
@@ -24,7 +20,7 @@ async function CarList({ filter }) {
   }
 
   return (
-    <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-4 xl:gap-8 p-4">
       {displayedCars.map((car) => (
         <CarCard car={car} key={car.id} />
       ))}

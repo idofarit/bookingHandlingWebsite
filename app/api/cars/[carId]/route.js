@@ -13,5 +13,3 @@ export async function GET(request, { params }) {
     return Response.json({ message: "Car not found" });
   }
 }
-
-// export async function POST() {}
