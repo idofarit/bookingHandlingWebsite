@@ -16,7 +16,7 @@ async function CarList({ filter }) {
       (cars) => cars.maxCapacity >= 5 && cars.maxCapacity <= 6
     );
   } else if (filter === "motorhome") {
-    displayedCars = cars.filter((cars) => cars.maxCapacity >= 8);
+    displayedCars = cars.filter((cars) => cars.maxCapacity >= 6);
   }
 
   return (
